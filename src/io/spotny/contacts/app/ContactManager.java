@@ -1,6 +1,5 @@
 package io.spotny.contacts.app;
 
-import java.util.List;
 import java.util.Scanner;
 
 import io.spotny.contacts.commands.AddContactInfoCommand;
@@ -11,11 +10,8 @@ import io.spotny.contacts.commands.ExportCSVCommand;
 import io.spotny.contacts.commands.ListAllContactsCommand;
 import io.spotny.contacts.commands.SearchContactCommand;
 import io.spotny.contacts.io.Console;
-import io.spotny.contacts.models.Person;
-import io.spotny.contacts.persistence.Repository;
 import io.spotny.contacts.repositories.FilesystemPersonsRepository;
 import io.spotny.contacts.repositories.PersonRepository;
-import io.spotny.contacts.services.CSVExporterService;
 import io.spotny.contacts.services.Exportable;
 import io.spotny.contacts.services.JsonExporterService;
 
