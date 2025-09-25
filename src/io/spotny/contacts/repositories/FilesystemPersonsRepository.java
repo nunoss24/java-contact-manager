@@ -4,14 +4,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 import io.spotny.contacts.models.Person;
+import io.spotny.contacts.persistence.BinaryFile;
 
+public class FilesystemPersonsRepository extends BinaryFile<List<Person>> implements PersonRepository{
+    
+      private final List<Person> data;
 
-public class InMemoryPersonsRepositories implements PersonRepository{
-
-    private final List<Person> data;
-
-    public InMemoryPersonsRepositories() {
-        data = new ArrayList<>();
+    public FilesystemPersonsRepository() {
+        super("persons.db");
+        var fileContent = read();
+        data = fileContent != null ? fileContent : new ArrayList<>();
     }
 
     @Override
@@ -31,6 +33,7 @@ public class InMemoryPersonsRepositories implements PersonRepository{
     @Override
     public void insert(Person element) {
         data.add(element);
+        write(data);
     }
 
     @Override
@@ -39,11 +42,13 @@ public class InMemoryPersonsRepositories implements PersonRepository{
         if(index != -1) {
             data.set(index, element);
         }
+        write(data);
     }
 
     @Override
     public void delete(Person element) {
         data.remove(element);
+        write(data);
     }
 
     @Override
@@ -53,5 +58,6 @@ public class InMemoryPersonsRepositories implements PersonRepository{
         }
 
         data.removeIf(person -> person.getId().equals(id));
+        write(data);
     }
 }

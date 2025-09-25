@@ -82,12 +82,13 @@ public class Console {
 
     public static void showTutorial() {
         text("Choose one of the following options");
-        text("1. Add a new contact");
+        text("1. Create new person");
         text("2. View all contacts");
         text("3. Search for a contact");
         text("4. Delete a contact");
-        text("5. Export contacts to CSV");
-        text("6. Exit the application");
+        text("5. Add contact information to a person");
+        text("6. Export contacts to CSV");
+        text("7. Exit the application");
     }
 
     public static void invalidCommand() {

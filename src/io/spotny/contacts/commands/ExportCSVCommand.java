@@ -3,17 +3,15 @@ package io.spotny.contacts.commands;
 import java.util.Scanner;
 
 import io.spotny.contacts.io.Console;
-import io.spotny.contacts.models.Person;
-import io.spotny.contacts.persistence.TextFile;
-import io.spotny.contacts.persistence.dal.Repository;
-import io.spotny.contacts.services.CSVExporterService;
+import io.spotny.contacts.repositories.PersonRepository;
+import io.spotny.contacts.services.Exportable;
 
-public class ExportCSVCommand {
-    private final Repository<Person> repository;
+public class ExportCSVCommand implements Command{
+    private final PersonRepository repository;
     private final Scanner keyboard;
-    private final CSVExporterService csvExporterService;
+    private final Exportable csvExporterService;
 
-    public ExportCSVCommand(Scanner keyboard, Repository<Person> repository, CSVExporterService csvExporterService) {
+    public ExportCSVCommand(Scanner keyboard, PersonRepository repository, Exportable csvExporterService) {
         this.keyboard = keyboard;
         this.repository = repository;
         this.csvExporterService = csvExporterService;
@@ -23,18 +21,8 @@ public class ExportCSVCommand {
         Console.title("Export Contacts to CSV");
         Console.inputOption("File name:");
         var fileName = keyboard.next();
-
-        var file = new TextFile(fileName);
-        file.delete();
-
-        file.writeLine("SEP=;");
-        file.writeLine("ID;Name;Email");
-
         var persons = repository.findAll();
 
-        persons
-            .stream()
-            .map(person -> String.format("%s;%s;%s", person.getId(), person.getName(), person.getEmail()))
-            .forEach(file::writeLine);
+        csvExporterService.export(fileName, persons);
     }
 }

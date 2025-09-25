@@ -1,4 +1,4 @@
-package io.spotny.contacts.persistence.dal;
+package io.spotny.contacts.persistence;
 
 import java.util.List;
 

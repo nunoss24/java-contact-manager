@@ -1,14 +1,13 @@
 package io.spotny.contacts.commands;
 
 import io.spotny.contacts.io.Console;
-import io.spotny.contacts.models.Person;
-import io.spotny.contacts.persistence.dal.Repository;
+import io.spotny.contacts.repositories.PersonRepository;
 
-public class ListAllContactsCommand {
+public class ListAllContactsCommand implements Command {
     
-    private final Repository<Person> personRepository;
+    private final PersonRepository personRepository;
 
-    public ListAllContactsCommand(Repository<Person> personRepository) {
+    public ListAllContactsCommand(PersonRepository personRepository) {
         this.personRepository = personRepository;
     }
 

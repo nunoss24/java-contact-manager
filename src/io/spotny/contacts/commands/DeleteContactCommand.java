@@ -3,14 +3,13 @@ package io.spotny.contacts.commands;
 import java.util.Scanner;
 
 import io.spotny.contacts.io.Console;
-import io.spotny.contacts.models.Person;
-import io.spotny.contacts.persistence.dal.Repository;
+import io.spotny.contacts.repositories.PersonRepository;
 
-public class DeleteContactCommand {
+public class DeleteContactCommand implements Command {
     private final Scanner keyboard;
-    private final Repository<Person> repository;
+    private final PersonRepository repository;
 
-    public DeleteContactCommand(Scanner keyboard, Repository<Person> repository) {
+    public DeleteContactCommand(Scanner keyboard, PersonRepository repository) {
         this.keyboard = keyboard;
         this.repository = repository;
     }
