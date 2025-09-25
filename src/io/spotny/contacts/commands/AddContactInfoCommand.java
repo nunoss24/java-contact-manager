@@ -35,7 +35,7 @@ public class AddContactInfoCommand implements Command {
         Console.inputOption("Contact Value:");
         var value = keyboard.next();
 
-        var contact = new Contact(ContactType.fromString(value) ,value);
+        var contact = new Contact(ContactType.fromString(type) ,value);
         person.addContact(contact);
 
         personRepository.update(person);
